@@ -1,0 +1,36 @@
+{
+    "name": "Berita Sepak Bola",
+    "short_name": "BeBo",
+    "description": "Situs Berita Sepak Bola",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#eb407a",
+    "theme_color": "#eb407a",
+    "icons": [
+        {
+            "src": "/images/icon/icons-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+          },
+        {
+          "src": "/images/icon/icons-192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        },
+        {
+            "src": "/images/icon/icons-96.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/images/icon/icons-72.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/images/icon/icons-48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        }        
+      ]
+}

@@ -1,23 +1,22 @@
-var dbPromised = idb.open("news-reader", 1, function(upgradeDb) {
+var dbPromised = idb.open("bebo", 25, function(upgradeDb) {
   var articlesObjectStore = upgradeDb.createObjectStore("articles", {
-    keyPath: "ID"
+    keyPath: "id"
   });
-  articlesObjectStore.createIndex("post_title", "post_title", {
-    unique: false
-  });
+  articlesObjectStore.createIndex("teams_id", "id", { unique: false });
 });
 
-function saveForLater(article) {
+function saveForLater(data) {
+  console.log(data)
   dbPromised
     .then(function(db) {
       var tx = db.transaction("articles", "readwrite");
-      var store = tx.objectStore("articles");
-      console.log(article);
-      store.add(article.result);
+      var store = tx.objectStore("articles");    
+      store.put(data);
+      console.log(data)
       return tx.complete;
     })
     .then(function() {
-      console.log("Artikel berhasil di simpan.");
+      console.log("Tim berhasil di simpan.");
     });
 }
 
@@ -29,24 +28,10 @@ function getAll() {
         var store = tx.objectStore("articles");
         return store.getAll();
       })
-      .then(function(articles) {
-        resolve(articles);
+      .then(function(data) {
+        resolve(data);
       });
   });
-}
-
-function getAllByTitle(title) {
-  dbPromised
-    .then(function(db) {
-      var tx = db.transaction("articles", "readonly");
-      var store = tx.objectStore("articles");
-      var titleIndex = store.index("post_title");
-      var range = IDBKeyRange.bound(title, title + "\uffff");
-      return titleIndex.getAll(range);
-    })
-    .then(function(articles) {
-      console.log(articles);
-    });
 }
 
 function getById(id) {
@@ -57,8 +42,8 @@ function getById(id) {
         var store = tx.objectStore("articles");
         return store.get(id);
       })
-      .then(function(article) {
-        resolve(article);
+      .then(function(data) {         
+        resolve(data);  
       });
   });
 }
